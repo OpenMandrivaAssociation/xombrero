@@ -1,19 +1,27 @@
+%if %{mdvver} >= 201200
+%define gtkver 3
+%else
+%define gtkver 2
+%endif
+
 Summary:	A minimalists web browser
-Name:		xxxterm
-Version:	1.11.3
+Name:		xombrero
+Version:	1.2.0
 Release:	%mkrel 1
 License:	MIT
 Group:		Networking/WWW
-URL:		https://opensource.conformal.com/wiki/XXXTerm
+URL:		https://opensource.conformal.com/wiki/xombrero
 
-Source0:		https://opensource.conformal.com/snapshots/xxxterm/%{name}-%{version}.tgz
-Patch0:		xxxterm-1.8.0-mdv-desktop.patch
-Patch1:		xxxterm-1.11.3-link-javascriptcoregtk.patch
+Source0:	https://opensource.conformal.com/snapshots/%{name}/%{name}-%{version}.tgz
+%if %{gtkver} == 3
+BuildRequires:	webkitgtk3-devel >= 1.3.1
+%else
 BuildRequires:	webkitgtk-devel >= 1.3.1
-BuildRequires:	gtk2-devel libsoup-devel gnutls-devel libbsd-devel
+%endif
+BuildRequires:	gtk+%{gtkver}-devel libsoup-devel gnutls-devel libbsd-devel
 
 %description
-xxxterm is a minimalist web browser with sophisticated security features
+%{name} is a minimalist web browser with sophisticated security features
 designed-in (rather than through an add-on). In particular, it provides both
 persistent and per-session controls for scripts and cookies, making it easy
 to thwart tracking and scripting attacks.
@@ -28,13 +36,11 @@ from those sites.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
 
 %build
 cd linux
 export CFLAGS="%optflags"
-%{__make} %{?_smp_mflags} OPTIMIZE="%{optflags}"
+%{__make} %{?_smp_mflags} OPTIMIZE="%{optflags}" GTK_VERSION=gtk%{gtkver}
 
 %install
 export PREFIX=%{buildroot}/usr
@@ -43,11 +49,11 @@ pushd linux
 popd
 for s in 16 32 48 64 128; do
 	install -d -m 0755 %{buildroot}%{_iconsdir}/hicolor/${s}x${s}/apps/
-	ln -s ../../../../xxxterm/xxxtermicon${s}.png %{buildroot}%{_iconsdir}/hicolor/${s}x${s}/apps/xxxterm.png
+	ln -s ../../../../%{name}/%{name}icon${s}.png %{buildroot}%{_iconsdir}/hicolor/${s}x${s}/apps/%{name}.png
 done
-install -D -m 0644 xxxterm.desktop %{buildroot}%{_datadir}/applications/xxxterm.desktop
-install -D -m 0644 style.css %{buildroot}%{_datadir}/xxxterm/style.css
-install -d -m 0755 %{buildroot}/%{_docdir}/xxxterm
+install -D -m 0644 %{name}.desktop %{buildroot}%{_datadir}/applications/%{name}.desktop
+install -D -m 0644 style.css %{buildroot}%{_datadir}/%{name}/style.css
+install -d -m 0755 %{buildroot}/%{_docdir}/%{name}
 cat > %{buildroot}/%{_docdir}/%{name}/LICENSE << EOF
 -= License =-
 
@@ -106,12 +112,13 @@ THE SOFTWARE.
 EOF
 
 %files
-%doc %dir %{_docdir}/xxxterm
-%doc %{_docdir}/xxxterm/LICENSE
-%{_mandir}/man1/xxxterm.*
-%{_bindir}/xxxterm
-%{_datadir}/applications/xxxterm.desktop
-%{_datadir}/xxxterm/style.css
-%{_datadir}/xxxterm/xxxterm*.png
-%{_datadir}/xxxterm/tld-rules
-%{_iconsdir}/hicolor/*/apps/xxxterm.png
+%doc %dir %{_docdir}/%{name}
+%doc %{_docdir}/%{name}/LICENSE
+%{_mandir}/man1/%{name}.*
+%{_bindir}/%{name}
+%{_datadir}/applications/%{name}.desktop
+%{_datadir}/%{name}/%{name}.css
+%{_datadir}/%{name}/style.css
+%{_datadir}/%{name}/%{name}*.png
+%{_datadir}/%{name}/tld-rules
+%{_iconsdir}/hicolor/*/apps/%{name}.png
