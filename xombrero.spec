@@ -11,6 +11,7 @@ Release:	1
 License:	MIT
 Group:		Networking/WWW
 URL:		https://opensource.conformal.com/wiki/xombrero
+Obsoletes:	xxxterm < 2.0
 
 Source0:	https://opensource.conformal.com/snapshots/%{name}/%{name}-%{version}.tgz
 %if %{gtkver} == 3
