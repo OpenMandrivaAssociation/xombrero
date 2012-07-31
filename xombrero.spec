@@ -7,13 +7,14 @@
 Summary:	A minimalists web browser
 Name:		xombrero
 Version:	1.2.2
-Release:	1
+Release:	2
 License:	MIT
 Group:		Networking/WWW
 URL:		https://opensource.conformal.com/wiki/xombrero
 Obsoletes:	xxxterm < 2.0
 
 Source0:	https://opensource.conformal.com/snapshots/%{name}/%{name}-%{version}.tgz
+Patch0:		xombrero-1.2.2-mdv-usr-prefix.patch
 %if %{gtkver} == 3
 BuildRequires:	webkitgtk3-devel >= 1.3.1
 %else
@@ -37,11 +38,13 @@ from those sites.
 
 %prep
 %setup -q
+%patch0 -p1
+sed 's,/usr/local,/usr,' -i %{name}.conf
 
 %build
 cd linux
 export CFLAGS="%optflags"
-%{__make} %{?_smp_mflags} OPTIMIZE="%{optflags}" GTK_VERSION=gtk%{gtkver}
+%{__make} %{?_smp_mflags} OPTIMIZE="%{optflags}" GTK_VERSION=gtk%{gtkver} PREFIX=%{_prefix}
 
 %install
 export PREFIX=%{buildroot}/usr
