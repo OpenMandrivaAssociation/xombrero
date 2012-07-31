@@ -21,6 +21,7 @@ BuildRequires:	webkitgtk3-devel >= 1.3.1
 BuildRequires:	webkitgtk-devel >= 1.3.1
 %endif
 BuildRequires:	gtk+%{gtkver}-devel libsoup-devel gnutls-devel libbsd-devel
+BuildRequires:	glib-networking
 
 %description
 %{name} is a minimalist web browser with sophisticated security features
@@ -43,7 +44,7 @@ sed 's,/usr/local,/usr,' -i %{name}.conf
 
 %build
 cd linux
-export CFLAGS="%optflags"
+export CFLAGS="%{optflags}"
 %{__make} %{?_smp_mflags} OPTIMIZE="%{optflags}" GTK_VERSION=gtk%{gtkver} PREFIX=%{_prefix}
 
 %install
