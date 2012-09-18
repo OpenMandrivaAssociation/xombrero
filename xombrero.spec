@@ -15,6 +15,7 @@ Obsoletes:	xxxterm < 2.0
 
 Source0:	https://opensource.conformal.com/snapshots/%{name}/%{name}-%{version}.tgz
 Patch0:		xombrero-1.3.0-mdv-usr-prefix.patch
+Provides:	webclient
 %if %{gtkver} == 3
 BuildRequires:	webkitgtk3-devel >= 1.3.1
 %else
