@@ -6,16 +6,15 @@
 
 Summary:	A minimalists web browser
 Name:		xombrero
-Version:	1.3.1
-Release:	1
+Version:	1.2.2
+Release:	2
 License:	MIT
 Group:		Networking/WWW
 URL:		https://opensource.conformal.com/wiki/xombrero
 Obsoletes:	xxxterm < 2.0
 
 Source0:	https://opensource.conformal.com/snapshots/%{name}/%{name}-%{version}.tgz
-Patch0:		xombrero-1.3.0-mdv-usr-prefix.patch
-Provides:	webclient
+Patch0:		xombrero-1.2.2-mdv-usr-prefix.patch
 %if %{gtkver} == 3
 BuildRequires:	webkitgtk3-devel >= 1.3.1
 %else
@@ -127,5 +126,41 @@ EOF
 %{_datadir}/%{name}/style.css
 %{_datadir}/%{name}/%{name}*.png
 %{_datadir}/%{name}/tld-rules
-%{_datadir}/%{name}/hsts-preload
 %{_iconsdir}/hicolor/*/apps/%{name}.png
+
+
+%changelog
+* Tue Jul 31 2012 Dmitry Mikhirev <dmikhirev@mandriva.org> 1.2.2-2
++ Revision: 811498
+- BR glib-networking (fix TLS/SSL support)
+- fix prefix
+- obsolete xxxterm
+
+* Mon Jul 30 2012 Dmitry Mikhirev <dmikhirev@mandriva.org> 1.2.2-1
++ Revision: 811385
+- update to 1.2.2
+
+* Mon Jul 23 2012 Dmitry Mikhirev <dmikhirev@mandriva.org> 1.2.0-1
++ Revision: 810647
+- rename and update to xombrero 1.2.0
+- Rename xxxterm to xombrero
+
+* Fri Mar 02 2012 Dmitry Mikhirev <dmikhirev@mandriva.org> 1.11.3-1
++ Revision: 781779
+- update to 1.11.3
+
+* Sun Jan 08 2012 Dmitry Mikhirev <dmikhirev@mandriva.org> 1.10.0-1
++ Revision: 758740
+- new version 1.10.0
+
+* Mon Dec 12 2011 Dmitry Mikhirev <dmikhirev@mandriva.org> 1.9.0-1
++ Revision: 740462
+- Forgotten patch added
+- Linking to libjavascriptcoregtk-1.0 fixed
+- Update to 1.9.0
+
+* Thu Nov 03 2011 Andrey Smirnov <asmirnov@mandriva.org> 1.8.0-1
++ Revision: 715807
+- Macros fixed
+- imported package xxxterm
+
