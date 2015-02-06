@@ -7,7 +7,7 @@
 Summary:	A minimalists web browser
 Name:		xombrero
 Version:	1.2.2
-Release:	2
+Release:	3
 License:	MIT
 Group:		Networking/WWW
 URL:		https://opensource.conformal.com/wiki/xombrero
