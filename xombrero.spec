@@ -11,6 +11,7 @@ Source0:	https://opensource.conformal.com/snapshots/%{name}/%{name}-%{version}.t
 BuildRequires:	webkitgtk3-devel >= 1.3.1
 BuildRequires:	gtk+3.0-devel libsoup-devel gnutls-devel libbsd-devel
 BuildRequires:	glib-networking
+BuildRequires:	groff-for-man
 
 %description
 %{name} is a minimalist web browser with sophisticated security features
