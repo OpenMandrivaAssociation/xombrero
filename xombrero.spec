@@ -29,7 +29,7 @@ from those sites.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 sed 's,/usr/local,/usr,' -i %{name}.conf
 
 %build
